@@ -10,16 +10,12 @@ using namespace std::chrono;
 
 // opencv library
 #include <opencv2/opencv.hpp>
-#ifdef _DEBUG
-#pragma comment(lib,"opencv_world310d.lib")
-#else
-#pragma comment(lib,"opencv_world310.lib")
-#endif
+
 
 /**
  * \brief
  * \param argv 3
- * \param argc argc[1]:×óÓ°ÏñÂ·¾¶ argc[2]: ÓÒÓ°ÏñÂ·¾¶ argc[3]: ×îĞ¡ÊÓ²î[¿ÉÑ¡£¬Ä¬ÈÏ0] argc[4]: ×î´óÊÓ²î[¿ÉÑ¡£¬Ä¬ÈÏ64]
+ * \param argc argc[1]:å·¦å½±åƒè·¯å¾„ argc[2]: å³å½±åƒè·¯å¾„ argc[3]: æœ€å°è§†å·®[å¯é€‰ï¼Œé»˜è®¤0] argc[4]: æœ€å¤§è§†å·®[å¯é€‰ï¼Œé»˜è®¤64]
  * \param eg. ..\Data\cone\im2.png ..\Data\cone\im6.png 0 64
  * \param eg. ..\Data\Reindeer\view1.png ..\Data\Reindeer\view5.png 0 128
  * \return
@@ -27,12 +23,12 @@ using namespace std::chrono;
 int main(int argv, char** argc)
 {
     if (argv < 3) {
-        std::cout << "²ÎÊı¹ıÉÙ£¬ÇëÖÁÉÙÖ¸¶¨×óÓÒÓ°ÏñÂ·¾¶£¡" << std::endl;
+        std::cout << "å‚æ•°è¿‡å°‘ï¼Œè¯·è‡³å°‘æŒ‡å®šå·¦å³å½±åƒè·¯å¾„!" << std::endl;
         return -1;
     }
 
-    //¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤//
-    // ¶ÁÈ¡Ó°Ïñ
+    //Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·//
+    // è¯»å–å½±åƒ
     std::string path_left = argc[1];
     std::string path_right = argc[2];
 
@@ -41,20 +37,20 @@ int main(int argv, char** argc)
     cv::Mat img_right = cv::imread(path_right, cv::IMREAD_GRAYSCALE);
 
     if (img_left.data == nullptr || img_right.data == nullptr) {
-        std::cout << "¶ÁÈ¡Ó°ÏñÊ§°Ü£¡" << std::endl;
+        std::cout << "è¯»å–å½±åƒå¤±è´¥!" << std::endl;
         return -1;
     }
     if (img_left.rows != img_right.rows || img_left.cols != img_right.cols) {
-        std::cout << "×óÓÒÓ°Ïñ³ß´ç²»Ò»ÖÂ£¡" << std::endl;
+        std::cout << "å·¦å³å½±åƒå°ºå¯¸ä¸ä¸€è‡´!" << std::endl;
         return -1;
     }
 
 
-    //¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤//
+    //Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·//
     const sint32 width = static_cast<uint32>(img_left.cols);
     const sint32 height = static_cast<uint32>(img_right.rows);
 
-    // ×óÓÒÓ°ÏñµÄ»Ò¶ÈÊı¾İ
+    // å·¦å³å½±åƒçš„ç°åº¦æ•°æ®
     auto bytes_left = new uint8[width * height];
     auto bytes_right = new uint8[width * height];
     for (int i = 0; i < height; i++) {
@@ -66,65 +62,65 @@ int main(int argv, char** argc)
 
     printf("Loading Views...Done!\n");
 
-    // SGMÆ¥Åä²ÎÊıÉè¼Æ
+    // SGMåŒ¹é…å‚æ•°è®¾è®¡
     SemiGlobalMatching::SGMOption sgm_option;
-    // ¾ÛºÏÂ·¾¶Êı
+    // èšåˆè·¯å¾„æ•°
     sgm_option.num_paths = 8;
-    // ºòÑ¡ÊÓ²î·¶Î§
+    // å€™é€‰è§†å·®èŒƒå›´
     sgm_option.min_disparity = argv < 4 ? 0 : atoi(argc[3]);
     sgm_option.max_disparity = argv < 5 ? 64 : atoi(argc[4]);
-    // census´°¿ÚÀàĞÍ
+    // censusçª—å£ç±»å‹
     sgm_option.census_size = SemiGlobalMatching::Census5x5;
-    // Ò»ÖÂĞÔ¼ì²é
+    // ä¸€è‡´æ€§æ£€æŸ¥
     sgm_option.is_check_lr = true;
     sgm_option.lrcheck_thres = 1.0f;
-    // Î¨Ò»ĞÔÔ¼Êø
+    // å”¯ä¸€æ€§çº¦æŸ
     sgm_option.is_check_unique = true;
     sgm_option.uniqueness_ratio = 0.99;
-    // ÌŞ³ıĞ¡Á¬Í¨Çø
+    // å‰”é™¤å°è¿é€šåŒº
     sgm_option.is_remove_speckles = true;
     sgm_option.min_speckle_aera = 50;
-    // ³Í·£ÏîP1¡¢P2
+    // æƒ©ç½šé¡¹P1ã€P2
     sgm_option.p1 = 10;
     sgm_option.p2_init = 150;
-    // ÊÓ²îÍ¼Ìî³ä
-    // ÊÓ²îÍ¼Ìî³äµÄ½á¹û²¢²»¿É¿¿£¬Èô¹¤³Ì£¬²»½¨ÒéÌî³ä£¬Èô¿ÆÑĞ£¬Ôò¿ÉÌî³ä
+    // è§†å·®å›¾å¡«å……
+    // è§†å·®å›¾å¡«å……çš„ç»“æœå¹¶ä¸å¯é ï¼Œè‹¥å·¥ç¨‹ï¼Œä¸å»ºè®®å¡«å……ï¼Œè‹¥ç§‘ç ”ï¼Œåˆ™å¯å¡«å……
     sgm_option.is_fill_holes = false;
 
     printf("w = %d, h = %d, d = [%d,%d]\n\n", width, height, sgm_option.min_disparity, sgm_option.max_disparity);
 
-    // ¶¨ÒåSGMÆ¥ÅäÀàÊµÀı
+    // å®šä¹‰SGMåŒ¹é…ç±»å®ä¾‹
     SemiGlobalMatching sgm;
 
-    //¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤//
-    // ³õÊ¼»¯
+    //Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·//
+    // åˆå§‹åŒ–
 	printf("SGM Initializing...\n");
     auto start = std::chrono::steady_clock::now();
     if (!sgm.Initialize(width, height, sgm_option)) {
-        std::cout << "SGM³õÊ¼»¯Ê§°Ü£¡" << std::endl;
+        std::cout << "SGMåˆå§‹åŒ–å¤±è´¥!" << std::endl;
         return -2;
     }
     auto end = std::chrono::steady_clock::now();
     auto tt = duration_cast<std::chrono::milliseconds>(end - start);
     printf("SGM Initializing Done! Timing : %lf s\n\n", tt.count() / 1000.0);
 
-    //¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤//
-    // Æ¥Åä
+    //Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·//
+    // åŒ¹é…
 	printf("SGM Matching...\n");
     start = std::chrono::steady_clock::now();
-    // disparityÊı×é±£´æ×ÓÏñËØµÄÊÓ²î½á¹û
+    // disparityæ•°ç»„ä¿å­˜å­åƒç´ çš„è§†å·®ç»“æœ
     auto disparity = new float32[uint32(width * height)]();
     if (!sgm.Match(bytes_left, bytes_right, disparity)) {
-        std::cout << "SGMÆ¥ÅäÊ§°Ü£¡" << std::endl;
+        std::cout << "SGMåŒ¹é…å¤±è´¥!" << std::endl;
         return -2;
     }
     end = std::chrono::steady_clock::now();
     tt = duration_cast<std::chrono::milliseconds>(end - start);
     printf("\nSGM Matching...Done! Timing :   %lf s\n", tt.count() / 1000.0);
 
-    //¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤//
-	// ÏÔÊ¾ÊÓ²îÍ¼
-    // ×¢Òâ£¬¼ÆËãµãÔÆ²»ÄÜÓÃdisp_matµÄÊı¾İ£¬ËüÊÇÓÃÀ´ÏÔÊ¾ºÍ±£´æ½á¹ûÓÃµÄ¡£¼ÆËãµãÔÆÒªÓÃÉÏÃæµÄdisparityÊı×éÀïµÄÊı¾İ£¬ÊÇ×ÓÏñËØ¸¡µãÊı
+    //Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·//
+	// æ˜¾ç¤ºè§†å·®å›¾
+    // æ³¨æ„ï¼Œè®¡ç®—ç‚¹äº‘ä¸èƒ½ç”¨disp_matçš„æ•°æ®ï¼Œå®ƒæ˜¯ç”¨æ¥æ˜¾ç¤ºå’Œä¿å­˜ç»“æœç”¨çš„ã€‚è®¡ç®—ç‚¹äº‘è¦ç”¨ä¸Šé¢çš„disparityæ•°ç»„é‡Œçš„æ•°æ®ï¼Œæ˜¯å­åƒç´ æµ®ç‚¹æ•°
     cv::Mat disp_mat = cv::Mat(height, width, CV_8UC1);
     float min_disp = width, max_disp = -width;
     for (sint32 i = 0; i < height; i++) {
@@ -148,12 +144,12 @@ int main(int argv, char** argc)
         }
     }
 
-    cv::imshow("ÊÓ²îÍ¼", disp_mat);
+    cv::imshow("disp", disp_mat);
     cv::Mat disp_color;
     applyColorMap(disp_mat, disp_color, cv::COLORMAP_JET);
-    cv::imshow("ÊÓ²îÍ¼-Î±²Ê", disp_color);
+    cv::imshow("disp-color", disp_color);
 
-    // ±£´æ½á¹û
+    // ä¿å­˜ç»“æœ
     std::string disp_map_path = argc[1]; disp_map_path += ".d.png";
     std::string disp_color_map_path = argc[1]; disp_color_map_path += ".c.png";
     cv::imwrite(disp_map_path, disp_mat);
@@ -162,8 +158,8 @@ int main(int argv, char** argc)
 
     cv::waitKey(0);
 
-    //¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤¡¤//
-    // ÊÍ·ÅÄÚ´æ
+    //Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·//
+    // é‡Šæ”¾å†…å­˜
     delete[] disparity;
     disparity = nullptr;
     delete[] bytes_left;
@@ -174,4 +170,3 @@ int main(int argv, char** argc)
     system("pause");
     return 0;
 }
-
