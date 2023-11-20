@@ -14,7 +14,7 @@ constexpr auto Invalid_Float = std::numeric_limits<float>::infinity();
 
 /** \brief 基础类型别名 */
 typedef int8_t			sint8;		// 有符号8位整数
-typedef uint8_t			uint8;		// 无符号8位整数
+typedef uint16_t		uint8;		// 无符号8位整数  // simd版本uint8使用的是uint16_t,而不是uint8_t
 typedef int16_t			sint16;		// 有符号16位整数
 typedef uint16_t		uint16;		// 无符号16位整数
 typedef int32_t			sint32;		// 有符号32位整数

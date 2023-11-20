@@ -11,7 +11,6 @@ using namespace std::chrono;
 // opencv library
 #include <opencv2/opencv.hpp>
 
-
 /**
  * \brief
  * \param argv 3
@@ -22,15 +21,14 @@ using namespace std::chrono;
  */
 int main(int argv, char** argc)
 {
-    if (argv < 3) {
-        std::cout << "参数过少，请至少指定左右影像路径!" << std::endl;
-        return -1;
-    }
 
+    std::cout << "SGBM SIMD VERSION" << std::endl;
     //···············································································//
     // 读取影像
     std::string path_left = argc[1];
     std::string path_right = argc[2];
+	// std::string path_left = "./Data/Statue2/imL.png";
+	// std::string path_right = "./Data/Statue2/imR.png";
 
     cv::Mat img_left_c = cv::imread(path_left, cv::IMREAD_COLOR);
     cv::Mat img_left = cv::imread(path_left, cv::IMREAD_GRAYSCALE);
@@ -55,8 +53,8 @@ int main(int argv, char** argc)
     auto bytes_right = new uint8[width * height];
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            bytes_left[i * width + j] = img_left.at<uint8>(i, j);
-            bytes_right[i * width + j] = img_right.at<uint8>(i, j);
+            bytes_left[i * width + j] = img_left.at<char>(i, j);
+            bytes_right[i * width + j] = img_right.at<char>(i, j);
         }
     }
 
@@ -150,8 +148,8 @@ int main(int argv, char** argc)
     cv::imshow("disp-color", disp_color);
 
     // 保存结果
-    std::string disp_map_path = argc[1]; disp_map_path += ".d.png";
-    std::string disp_color_map_path = argc[1]; disp_color_map_path += ".c.png";
+    std::string disp_map_path = path_left; disp_map_path += ".d.png";
+    std::string disp_color_map_path = path_left; disp_color_map_path += ".c.png";
     cv::imwrite(disp_map_path, disp_mat);
     cv::imwrite(disp_color_map_path, disp_color);
 
